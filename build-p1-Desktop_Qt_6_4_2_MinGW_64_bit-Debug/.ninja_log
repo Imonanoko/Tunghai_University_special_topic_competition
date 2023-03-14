@@ -1,0 +1,27 @@
+# ninja log v5
+4	191	7004646930056250	p1_autogen/mocs_compilation.cpp	f31add9ae8f5e5d8
+4	191	7004646930056250	p1_autogen/timestamp	f31add9ae8f5e5d8
+4	191	7004646930056250	C:/Users/Six square/Desktop/special topic/build-p1-Desktop_Qt_6_4_2_MinGW_64_bit-Debug/p1_autogen/mocs_compilation.cpp	f31add9ae8f5e5d8
+4	191	7004646930056250	C:/Users/Six square/Desktop/special topic/build-p1-Desktop_Qt_6_4_2_MinGW_64_bit-Debug/p1_autogen/timestamp	f31add9ae8f5e5d8
+762	2654	7003180698899686	CMakeFiles/p1.dir/main.cpp.obj	b4d5a2907bdedfa8
+758	2757	7003180699929710	CMakeFiles/p1.dir/p1_autogen/mocs_compilation.cpp.obj	5fd1226b9facd46a
+1890	2087	7004646948977328	p1.exe	770e19b77202fefc
+204	1890	7004646947032523	CMakeFiles/p1.dir/mainwindow.cpp.obj	f6c13fff3f495d4b
+4	190	7004647676750726	p1_autogen/timestamp	f31add9ae8f5e5d8
+4	190	7004647676750726	p1_autogen/mocs_compilation.cpp	f31add9ae8f5e5d8
+4	190	7004647676750726	C:/Users/Six square/Desktop/special topic/build-p1-Desktop_Qt_6_4_2_MinGW_64_bit-Debug/p1_autogen/timestamp	f31add9ae8f5e5d8
+4	190	7004647676750726	C:/Users/Six square/Desktop/special topic/build-p1-Desktop_Qt_6_4_2_MinGW_64_bit-Debug/p1_autogen/mocs_compilation.cpp	f31add9ae8f5e5d8
+202	1983	7004647694670689	CMakeFiles/p1.dir/mainwindow.cpp.obj	f6c13fff3f495d4b
+1984	2196	7004647696770687	p1.exe	770e19b77202fefc
+3	189	7004648672783995	p1_autogen/timestamp	f31add9ae8f5e5d8
+3	189	7004648672783995	p1_autogen/mocs_compilation.cpp	f31add9ae8f5e5d8
+3	189	7004648672783995	C:/Users/Six square/Desktop/special topic/build-p1-Desktop_Qt_6_4_2_MinGW_64_bit-Debug/p1_autogen/timestamp	f31add9ae8f5e5d8
+3	189	7004648672783995	C:/Users/Six square/Desktop/special topic/build-p1-Desktop_Qt_6_4_2_MinGW_64_bit-Debug/p1_autogen/mocs_compilation.cpp	f31add9ae8f5e5d8
+201	1947	7004648690353986	CMakeFiles/p1.dir/mainwindow.cpp.obj	f6c13fff3f495d4b
+1947	2147	7004648692313968	p1.exe	770e19b77202fefc
+4	185	7004653316360071	p1_autogen/timestamp	f31add9ae8f5e5d8
+4	185	7004653316360071	p1_autogen/mocs_compilation.cpp	f31add9ae8f5e5d8
+4	185	7004653316360071	C:/Users/Six square/Desktop/special topic/build-p1-Desktop_Qt_6_4_2_MinGW_64_bit-Debug/p1_autogen/timestamp	f31add9ae8f5e5d8
+4	185	7004653316360071	C:/Users/Six square/Desktop/special topic/build-p1-Desktop_Qt_6_4_2_MinGW_64_bit-Debug/p1_autogen/mocs_compilation.cpp	f31add9ae8f5e5d8
+197	1809	7004653332589125	CMakeFiles/p1.dir/mainwindow.cpp.obj	f6c13fff3f495d4b
+1809	2001	7004653334482513	p1.exe	770e19b77202fefc

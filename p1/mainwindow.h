@@ -20,9 +20,9 @@ public slots:
     void k_cls();
     void ks_cls();
     void all_cls();
-    void C();
-    void Cs();
-    void Dc();
+    void C1();
+    void C2();
+    void Cks();
     void Dcs();
 private:
     Ui::MainWindow *ui;

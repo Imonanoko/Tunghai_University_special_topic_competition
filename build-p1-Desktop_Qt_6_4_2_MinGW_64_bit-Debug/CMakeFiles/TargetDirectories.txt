@@ -1,0 +1,9 @@
+C:/Users/Six square/Desktop/special topic/build-p1-Desktop_Qt_6_4_2_MinGW_64_bit-Debug/CMakeFiles/p1.dir
+C:/Users/Six square/Desktop/special topic/build-p1-Desktop_Qt_6_4_2_MinGW_64_bit-Debug/CMakeFiles/edit_cache.dir
+C:/Users/Six square/Desktop/special topic/build-p1-Desktop_Qt_6_4_2_MinGW_64_bit-Debug/CMakeFiles/rebuild_cache.dir
+C:/Users/Six square/Desktop/special topic/build-p1-Desktop_Qt_6_4_2_MinGW_64_bit-Debug/CMakeFiles/list_install_components.dir
+C:/Users/Six square/Desktop/special topic/build-p1-Desktop_Qt_6_4_2_MinGW_64_bit-Debug/CMakeFiles/install.dir
+C:/Users/Six square/Desktop/special topic/build-p1-Desktop_Qt_6_4_2_MinGW_64_bit-Debug/CMakeFiles/install/local.dir
+C:/Users/Six square/Desktop/special topic/build-p1-Desktop_Qt_6_4_2_MinGW_64_bit-Debug/CMakeFiles/install/strip.dir
+C:/Users/Six square/Desktop/special topic/build-p1-Desktop_Qt_6_4_2_MinGW_64_bit-Debug/CMakeFiles/p1_autogen_timestamp_deps.dir
+C:/Users/Six square/Desktop/special topic/build-p1-Desktop_Qt_6_4_2_MinGW_64_bit-Debug/CMakeFiles/p1_autogen.dir

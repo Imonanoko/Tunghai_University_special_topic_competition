@@ -155,7 +155,7 @@
    <widget class="QLineEdit" name="lineEdit_12">
     <property name="geometry">
      <rect>
-      <x>452</x>
+      <x>470</x>
       <y>60</y>
       <width>181</width>
       <height>28</height>
@@ -167,18 +167,18 @@
      <rect>
       <x>420</x>
       <y>60</y>
-      <width>31</width>
+      <width>41</width>
       <height>20</height>
      </rect>
     </property>
     <property name="text">
-     <string>密文</string>
+     <string>明文2</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="lineEdit_14">
     <property name="geometry">
      <rect>
-      <x>452</x>
+      <x>470</x>
       <y>20</y>
       <width>181</width>
       <height>28</height>
@@ -190,12 +190,12 @@
      <rect>
       <x>420</x>
       <y>20</y>
-      <width>31</width>
+      <width>41</width>
       <height>20</height>
      </rect>
     </property>
     <property name="text">
-     <string>明文</string>
+     <string>明文1</string>
     </property>
    </widget>
    <widget class="QTableView" name="tableView">

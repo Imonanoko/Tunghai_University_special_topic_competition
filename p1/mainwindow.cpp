@@ -7,16 +7,18 @@
 #include <string>
 #include <algorithm>
 #include <QSignalMapper>
+#include<QDebug>
+#include<QString>
 
 using namespace std;
 QStandardItemModel* model = new QStandardItemModel();
-
 vector<int> StringToInt(string n1){
     vector<int> c(8);
     for(int i = 0;i < n1.length();i++)
         c[i] = n1[i];
     return c;
 }
+vector<vector<int>> globalp(18);
 vector<int> S_Box = {52, 91, 130, 169, 208, 247, 30, 71, 112, 153, 194, 235, 20, 63, 106, 149, 192, 236, 23, 68, 114, 159, 204, 250, 39, 86, 134, 181, 228, 19, 70, 120, 170, 219, 12, 64, 117, 168, 221, 16, 73, 126, 180, 234, 34, 90, 146, 203, 4, 61, 123, 183, 242, 45, 105, 167, 230, 37, 100, 164, 229, 40, 104, 174, 241, 51, 122, 191, 5, 78, 148, 220, 38, 113, 189, 8, 85, 162, 244, 65, 144, 225, 53, 137, 217, 48, 136, 222, 55, 143, 237, 72, 161, 0, 95, 193, 29, 131, 231, 77, 178, 24, 129, 239, 88, 198, 49, 163, 18, 138, 254, 111, 233, 98, 216, 92, 213, 89, 215, 97, 232, 110, 253, 135, 21, 166, 56, 202, 101, 2, 156, 58, 214, 128, 36, 206, 125, 43, 223, 151, 76, 10, 197, 141, 80, 26, 238, 184, 142, 99, 62, 32, 9, 248, 218, 205, 196, 190, 195, 201, 212, 246, 11, 41, 75, 116, 160, 224, 31, 102, 175, 14, 107, 200, 66, 177, 59, 187, 93, 3, 165, 96, 42, 252, 207, 176, 171, 173, 199, 251, 44, 109, 186, 54, 158, 79, 1, 179, 140, 132, 147, 209, 25, 119, 17, 182, 133, 127, 172, 22, 139, 74, 60, 94, 227, 118, 108, 188, 81, 67, 154, 84, 152, 69, 150, 103, 6, 46, 50, 35, 28, 47, 145, 57, 157, 226, 7, 240, 87, 83, 82, 13, 210, 121, 15, 33, 27, 245, 211, 124, 115, 155, 185, 243, 249, 255};
 int Inverse_S_Box(int Value)
 {
@@ -107,12 +109,12 @@ QString display(vector<int> n1){
     return QString::fromStdString(n2);
 }
 QString display2(vector<int> n1){
-    string n2="";
-    char hex[8];
+    QString n2="";
     for(int i=0;i<8;i++){
-        n2+=n1[i];
+        n2+=QChar(n1[i]);
     }
-    return QString::fromStdString(n2);
+//    return QString::fromStdString(n2);
+    return n2;
 }
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -143,7 +145,7 @@ MainWindow::MainWindow(QWidget *parent)
         "(((p + k1) ⊙ k3)⊕ k2)"};
     ui->setupUi(this);
 
-    QStringList labels = QString("     ,加密 (key),加密 (key_s),解密 (key),解密 (key_s)").simplified().split(",");
+    QStringList labels = QString("     ,加密1 ,加密2,加密ks,解密").simplified().split(",");
     model->setHorizontalHeaderLabels(labels);
     QStandardItem* item = 0;
     for(i = 0;i < 18;i++)
@@ -215,23 +217,23 @@ MainWindow::MainWindow(QWidget *parent)
     allCls->setGeometry(700,100,80,30);
     connect(allCls,SIGNAL(clicked()),this,SLOT(all_cls()));
 
-    QPushButton * C = new QPushButton("",this);
-    C->setText("加密(key)");
-    C->setGeometry(850,170,100,30);
-    connect(C,SIGNAL(clicked()),this,SLOT(C()));
+    QPushButton * C1 = new QPushButton("",this);
+    C1->setText("加密1");
+    C1->setGeometry(850,170,100,30);
+    connect(C1,SIGNAL(clicked()),this,SLOT(C1()));
 
-    QPushButton * Cs = new QPushButton("",this);
-    Cs->setText("加密(key_s)");
-    Cs->setGeometry(850,230,100,30);  
-    connect(Cs,SIGNAL(clicked()),this,SLOT(Cs()));
+    QPushButton * C2 = new QPushButton("",this);
+    C2->setText("加密2");
+    C2->setGeometry(850,230,100,30);
+    connect(C2,SIGNAL(clicked()),this,SLOT(C2()));
 
-    QPushButton * Dc = new QPushButton("",this);
-    Dc->setText("解密(key)");
-    Dc->setGeometry(850,290,100,30);
-    connect(Dc,SIGNAL(clicked()),this,SLOT(Dc()));
+    QPushButton * Cks = new QPushButton("",this);
+    Cks->setText("加密ks");
+    Cks->setGeometry(850,290,100,30);
+    connect(Cks,SIGNAL(clicked()),this,SLOT(Cks()));
 
     QPushButton * Dcs = new QPushButton("",this);
-    Dcs->setText("解密(key_s)");
+    Dcs->setText("解密");
     Dcs->setGeometry(850,350,100,30);
     connect(Dcs,SIGNAL(clicked()),this,SLOT(Dcs()));
 }
@@ -265,7 +267,7 @@ void MainWindow::ks_cls()
         array_line[i]->setText("");
     }
 }
-void MainWindow::C()
+void MainWindow::C1()
 {
     vector<int> k1=StringToInt(ui->lineEdit->text().toStdString());
     vector<int> k2=StringToInt(ui->lineEdit_5->text().toStdString());
@@ -291,15 +293,46 @@ void MainWindow::C()
                              XOR(Rotate(BinaryAdd(p,k1), k3),k2)
                    };
     for(int i=0;i<18;i++){
-        model->setData(model->index(i,1),display(n[i]));
+        model->setData(model->index(i,1),display2(n[i]));
+        globalp[i]=n[i];
+
     }
 }
 
-void MainWindow::Cs()
+void MainWindow::C2()
 {
     vector<int> k1=StringToInt(ui->lineEdit_9->text().toStdString());
     vector<int> k2=StringToInt(ui->lineEdit_10->text().toStdString());
     vector<int> k3=StringToInt(ui->lineEdit_11->text().toStdString());
+    vector<int> p=StringToInt(ui->lineEdit_12->text().toStdString());
+    vector<vector<int>> n = {BinaryAdd(XOR(Rotate(p,k1), k3),k2),
+                             XOR(BinaryAdd(Rotate(p,k3), k2),k1),
+                             XOR(Rotate(BinaryAdd(p,k2), k1),k3),
+                             Rotate(XOR(BinaryAdd(p,k3), k1),k2),
+                             XOR(BinaryAdd(Rotate(p,k2), k3),k1),
+                             XOR(BinaryAdd(Rotate(p,k3), k1),k2),
+                             Rotate(BinaryAdd(XOR(p,k1), k3),k2),
+                             Rotate(BinaryAdd(XOR(p,k2), k3),k1),
+                             BinaryAdd(XOR(Rotate(p,k3), k2),k1),
+                             BinaryAdd(XOR(Rotate(p,k3), k1),k2),
+                             BinaryAdd(Rotate(XOR(p,k3), k2),k1),
+                             BinaryAdd(Rotate(XOR(p,k1), k3),k2),
+                             BinaryAdd(Rotate(XOR(p,k2), k3),k1),
+                             XOR(BinaryAdd(Rotate(p,k1), k2),k3),
+                             XOR(Rotate(BinaryAdd(p,k1), k2),k3),
+                             Rotate(BinaryAdd(XOR(p,k1), k2),k3),
+                             Rotate(BinaryAdd(XOR(p,k2), k1),k3),
+                             XOR(Rotate(BinaryAdd(p,k1), k3),k2),
+                   };
+    for(int i=0;i<18;i++){
+        model->setData(model->index(i,2),display2(n[i]));
+    }
+}
+void MainWindow::Cks()
+{
+    vector<int> k1=StringToInt(ui->lineEdit->text().toStdString());
+    vector<int> k2=StringToInt(ui->lineEdit_5->text().toStdString());
+    vector<int> k3=StringToInt(ui->lineEdit_6->text().toStdString());
     vector<int> p=StringToInt(ui->lineEdit_14->text().toStdString());
     vector<vector<int>> n = {BinaryAdd(XOR(Rotate(p,k1), k3),k2),
                              XOR(BinaryAdd(Rotate(p,k3), k2),k1),
@@ -321,101 +354,55 @@ void MainWindow::Cs()
                              XOR(Rotate(BinaryAdd(p,k1), k3),k2),
                    };
     for(int i=0;i<18;i++){
-        model->setData(model->index(i,2),display(n[i]));
-    }
-}
-void MainWindow::Dc()
-{
-    vector<int> k1=StringToInt(ui->lineEdit->text().toStdString());
-    vector<int> k2=StringToInt(ui->lineEdit_5->text().toStdString());
-    vector<int> k3=StringToInt(ui->lineEdit_6->text().toStdString());
-    string str1 = ui->lineEdit_12->text().toStdString();
-    string str = "";
-    int num1 = 0;
-    vector<int> c(8);
-    int j=0;
-    for(int i = 0;i < str1.length();i++)
-    {
-        if(str1[i] != ' ')
-        {
-            str += str1[i];
-        }
-        else
-        {
-            num1=stoi(str, 0, 16);
-            c[j++]=num1;
-            num1=0;
-            str="";
-        }
-    }
-    vector<vector<int>> n = {InverseRotate(XOR(BinarySub(c,k2), k3),k1),
-                             InverseRotate(BinarySub(XOR(c,k1), k2),k3),
-                             BinarySub(InverseRotate(XOR(c,k3), k1),k2),
-                             BinarySub(XOR(InverseRotate(c,k2), k1),k3),
-                             InverseRotate(BinarySub(XOR(c,k1), k3),k2),
-                             InverseRotate(BinarySub(XOR(c,k2), k1),k3),
-                             XOR(BinarySub(InverseRotate(c,k2), k3),k1),
-                             XOR(BinarySub(InverseRotate(c,k1), k3),k2),
-                             InverseRotate(XOR(BinarySub(c,k1), k2),k3),
-                             InverseRotate(XOR(BinarySub(c,k2), k1),k3),
-                             XOR(InverseRotate(BinarySub(c,k1), k2),k3),
-                             XOR(InverseRotate(BinarySub(c,k2), k3),k1),
-                             XOR(InverseRotate(BinarySub(c,k1), k3),k2),
-                             InverseRotate(BinarySub(XOR(c,k3), k2),k1),
-                             BinarySub(InverseRotate(XOR(c,k3), k2),k1),
-                             XOR(BinarySub(InverseRotate(c,k3), k2),k1),
-                             XOR(BinarySub(InverseRotate(c,k3), k1),k2),
-                             BinarySub(InverseRotate(XOR(c,k2), k3),k1),
-                   };
-    for(int i=0;i<18;i++){
         model->setData(model->index(i,3),display2(n[i]));
     }
 }
 void MainWindow::Dcs()
 {
-    vector<int> k1=StringToInt(ui->lineEdit_9->text().toStdString());
-    vector<int> k2=StringToInt(ui->lineEdit_10->text().toStdString());
-    vector<int> k3=StringToInt(ui->lineEdit_11->text().toStdString());
-    string str1 = ui->lineEdit_12->text().toStdString();
-    string str = "";
-    int num1 = 0;
-    vector<int> c(8);
-    int j=0;
-    for(int i = 0;i < str1.length();i++)
-    {
-        if(str1[i] != ' ')
-        {
-            str += str1[i];
-        }
-        else
-        {
-            num1=stoi(str, 0, 16);
-            c[j++]=num1;
-            num1=0;
-            str="";
-        }
-    }
-    vector<vector<int>> n = {InverseRotate(XOR(BinarySub(c,k2), k3),k1),
-                             InverseRotate(BinarySub(XOR(c,k1), k2),k3),
-                             BinarySub(InverseRotate(XOR(c,k3), k1),k2),
-                             BinarySub(XOR(InverseRotate(c,k2), k1),k3),
-                             InverseRotate(BinarySub(XOR(c,k1), k3),k2),
-                             InverseRotate(BinarySub(XOR(c,k2), k1),k3),
-                             XOR(BinarySub(InverseRotate(c,k2), k3),k1),
-                             XOR(BinarySub(InverseRotate(c,k1), k3),k2),
-                             InverseRotate(XOR(BinarySub(c,k1), k2),k3),
-                             InverseRotate(XOR(BinarySub(c,k2), k1),k3),
-                             XOR(InverseRotate(BinarySub(c,k1), k2),k3),
-                             XOR(InverseRotate(BinarySub(c,k2), k3),k1),
-                             XOR(InverseRotate(BinarySub(c,k1), k3),k2),
-                             InverseRotate(BinarySub(XOR(c,k3), k2),k1),
-                             BinarySub(InverseRotate(XOR(c,k3), k2),k1),
-                             XOR(BinarySub(InverseRotate(c,k3), k2),k1),
-                             XOR(BinarySub(InverseRotate(c,k3), k1),k2),
-                             BinarySub(InverseRotate(XOR(c,k2), k3),k1),
+    vector<int> k1=StringToInt(ui->lineEdit->text().toStdString());
+    vector<int> k2=StringToInt(ui->lineEdit_5->text().toStdString());
+    vector<int> k3=StringToInt(ui->lineEdit_6->text().toStdString());
+//    string str1 = ui->lineEdit_12->text().toStdString();
+//    string str = "";
+//    int num1 = 0;
+//    vector<int> c(8);
+//    int j=0;
+//    for(int i = 0;i < str1.length();i++)
+//    {
+//        if(str1[i] != ' ')
+//        {
+//            str += str1[i];
+//        }
+//        else
+//        {
+//            num1=stoi(str, 0, 16);
+//            c[j++]=num1;
+//            num1=0;
+//            str="";
+//        }
+//    }
+    vector<vector<int>> n = {InverseRotate(XOR(BinarySub(globalp[0],k2), k3),k1),
+                             InverseRotate(BinarySub(XOR(globalp[1],k1), k2),k3),
+                             BinarySub(InverseRotate(XOR(globalp[2],k3), k1),k2),
+                             BinarySub(XOR(InverseRotate(globalp[3],k2), k1),k3),
+                             InverseRotate(BinarySub(XOR(globalp[4],k1), k3),k2),
+                             InverseRotate(BinarySub(XOR(globalp[5],k2), k1),k3),
+                             XOR(BinarySub(InverseRotate(globalp[6],k2), k3),k1),
+                             XOR(BinarySub(InverseRotate(globalp[7],k1), k3),k2),
+                             InverseRotate(XOR(BinarySub(globalp[8],k1), k2),k3),
+                             InverseRotate(XOR(BinarySub(globalp[9],k2), k1),k3),
+                             XOR(InverseRotate(BinarySub(globalp[10],k1), k2),k3),
+                             XOR(InverseRotate(BinarySub(globalp[11],k2), k3),k1),
+                             XOR(InverseRotate(BinarySub(globalp[12],k1), k3),k2),
+                             InverseRotate(BinarySub(XOR(globalp[13],k3), k2),k1),
+                             BinarySub(InverseRotate(XOR(globalp[14],k3), k2),k1),
+                             XOR(BinarySub(InverseRotate(globalp[15],k3), k2),k1),
+                             XOR(BinarySub(InverseRotate(globalp[16],k3), k1),k2),
+                             BinarySub(InverseRotate(XOR(globalp[17],k2), k3),k1),
                    };
     for(int i=0;i<18;i++){
         model->setData(model->index(i,4),display2(n[i]));
+//        qDebug() << display(n[i]) ;
     }
 }
 MainWindow::~MainWindow()
